@@ -79,5 +79,3 @@ jobs:
           # Create a pull request from the 'staging' branch to 'main'
           gh pr create --base main --head staging --title "Merge staging into main" --body "Automated pull request."
 
-
-

@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9  # Specify your desired Python version
+          python-version: 3.9
 
       - name: Install dependencies
         run: |
@@ -28,9 +28,9 @@ jobs:
 
       - name: Start and stop Python script
         run: |
-          python main.py &               # Start the Python script in the background
-          sleep 5s                      # Wait for 5 seconds (adjust the duration as needed)
-          pkill -f "python main.py"      # Stop the Python script
+          python main.py &               
+          sleep 5s                      
+          pkill -f "python main.py"      
 
       - name: Run Tests
         run: | 
@@ -38,23 +38,14 @@ jobs:
           
       - name: Push Dev to staging
         run: |
-          # Configure Git
           git config user.email "artitambe2602@gmail.com"
           git config user.name "Arti Tambe"
-
-          #Fetch Remote Branches test branches
           git fetch origin 
-
-          #Checkout Staging Branch
           git checkout staging
-
-          # Merge Dev into staging.
           git merge --allow-unrelated-histories dev
-
-          #Push to staging Branch
           git push origin staging
 
-  push_staging_to_main:
+  raise_pull_request:
     runs-on: ubuntu-latest
 
     steps:
@@ -64,7 +55,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9  # Specify your desired Python version
+          python-version: 3.9
 
       - name: Install dependencies
         run: |
@@ -73,9 +64,9 @@ jobs:
 
       - name: Start and stop Python script
         run: |
-          python main.py &               # Start the Python script in the background
-          sleep 5s                      # Wait for 5 seconds (adjust the duration as needed)
-          pkill -f "python main.py"      # Stop the Python script
+          python main.py &               
+          sleep 5s                      
+          pkill -f "python main.py"      
 
       - name: Run Tests
         run: | 
@@ -83,18 +74,9 @@ jobs:
         
       - name: Push staging to main
         run: |
-          # Configure Git
           git config user.email "artitambe2602@gmail.com"
           git config user.name "Arti Tambe"
-
-          #Fetch Remote Branches test branches
           git fetch origin 
-
-          #Checkout main Branch
           git checkout main
-
-          # Merge staging into main.
           git merge --allow-unrelated-histories staging
-
-          #Push to main Branch
           git push origin main
